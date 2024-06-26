@@ -99,4 +99,5 @@
         update buy_list set is_in = 1 where buy_id = #{buyId}
     </update>
 
+
 </mapper>

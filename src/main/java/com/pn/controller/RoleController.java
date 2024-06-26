@@ -170,4 +170,13 @@ public class RoleController {
         //响应
         return result;
     }
+    /**
+     * 导出角色数据
+     * */
+    @GetMapping("/exportTable")
+    public Result exportTable(Page page, Role role){
+        page = roleService.queryRolePage(page,role);
+        List<?> list = page.getResultList();
+        return Result.ok(list);
+    }
 }

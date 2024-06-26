@@ -3,6 +3,7 @@ package com.pn.controller;
 import com.pn.entity.Product;
 import com.pn.entity.ProductType;
 import com.pn.entity.Result;
+import com.pn.page.Page;
 import com.pn.service.ProductTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

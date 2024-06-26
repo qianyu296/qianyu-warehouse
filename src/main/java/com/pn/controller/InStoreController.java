@@ -7,6 +7,7 @@ import com.pn.page.Page;
 import com.pn.service.InStoreService;
 import com.pn.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -64,5 +65,14 @@ public class InStoreController {
         Result result = inStoreService.confirmInStore(inStore);
         //响应
         return result;
+    }
+    /**
+     * 导出入库列表数据
+     * */
+    @GetMapping("/exportTable")
+    public Result exportTable(Page page, InStore inStore){
+        page = inStoreService.queryInStorePage(page, inStore);
+        List<?> list = page.getResultList();
+        return Result.ok(list);
     }
 }

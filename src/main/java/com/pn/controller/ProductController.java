@@ -266,4 +266,13 @@ public class ProductController {
         //响应
         return result;
     }
+    /**
+     * 导出商品数据
+     * */
+    @GetMapping("/exportTable")
+    public Result exportTable(Page page, Product product){
+        page = productService.queryProductPage(page, product);
+        List<?> list = page.getResultList();
+        return Result.ok(list);
+    }
 }

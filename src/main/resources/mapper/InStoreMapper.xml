@@ -62,6 +62,9 @@
         <if test="inStore.endTime != null and inStore.endTime != ''">
             and t1.create_time &lt;= #{inStore.endTime}
         </if>
+        <if test="inStore.isIn != null">
+            and t1.is_in = #{inStore.isIn}
+        </if>
 
         order by t1.create_time desc
         limit #{page.limitIndex}, #{page.pageSize}

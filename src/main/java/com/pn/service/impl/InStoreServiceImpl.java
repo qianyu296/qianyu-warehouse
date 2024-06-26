@@ -52,7 +52,7 @@ public class InStoreServiceImpl implements InStoreService {
 
         //查询入库单总行数
         int inStoreCount = inStoreMapper.selectInStoreCount(inStore);
-
+        System.out.println(inStore.getIsIn());
         //分页查询入库单
         List<InStore> inStoreList = inStoreMapper.selectInStorePage(page, inStore);
 

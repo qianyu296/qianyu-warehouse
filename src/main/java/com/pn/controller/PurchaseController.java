@@ -129,4 +129,13 @@ public class PurchaseController {
         //响应
         return result;
     }
+    /**
+     * 导出采购列表数据
+     * */
+    @GetMapping("/exportTable")
+    public Result exportTable(Page page, Purchase purchase){
+        page = purchaseService.queryPurchasePage(page, purchase);
+        List<?> list = page.getResultList();
+        return Result.ok(list);
+    }
 }

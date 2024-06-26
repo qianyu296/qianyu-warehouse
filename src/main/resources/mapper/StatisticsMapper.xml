@@ -14,5 +14,85 @@
         where t1.store_id = t2.store_id
         group by t1.store_id, t2.store_name
     </select>
-
+    <select id="getPurchase" resultType="com.pn.entity.Statistics">
+        SELECT
+            pt.type_id AS typeId,
+            pt.type_name AS typeName,
+            SUM(bl.buy_num) AS buyNum
+        FROM
+            buy_list bl
+                JOIN
+            product p ON bl.product_id = p.product_id
+                JOIN
+            product_type pt ON p.type_id = pt.type_id
+        WHERE
+            bl.is_in = 1
+        GROUP BY
+            pt.type_id, pt.type_name;
+    </select>
+<!--    获取今年仓储走势-->
+    <select id="getStorage" resultType="com.pn.vo.StorageVO">
+        SELECT
+            YEAR(i.create_time) AS year,
+            MONTH(i.create_time) AS month,
+            s.store_name,
+            i.store_id,
+            SUM(i.in_num) AS total
+        FROM
+            in_store i
+            JOIN
+            store s ON i.store_id = s.store_id
+        WHERE
+            YEAR(i.create_time) = YEAR(CURDATE())
+          AND i.is_in = 1
+        GROUP BY
+            i.store_id,
+            YEAR(i.create_time),
+            MONTH(i.create_time),
+            s.store_name;
+    </select>
+    <select id="getInNum" resultType="java.lang.Long">
+        SELECT SUM(in_num) AS total_in_num
+        FROM in_store
+        WHERE is_in = 1
+          AND DATE(create_time) = CURDATE();
+    </select>
+    <select id="getOutNum" resultType="java.lang.Long">
+        SELECT SUM(out_num) AS total_out_num
+        FROM out_store
+        WHERE is_out = 1
+          AND DATE(create_time) = CURDATE();
+    </select>
+    <select id="getBuyNum" resultType="java.lang.Long">
+        SELECT SUM(fact_buy_num) AS total_buy_num
+        FROM buy_list
+        WHERE is_in = 1
+          AND DATE(buy_time) = CURDATE();
+    </select>
+    <select id="getInStorage" resultType="com.pn.vo.InOutStorageVO">
+        SELECT
+            MONTH(create_time) AS month,
+            SUM(in_num) AS total
+        FROM
+            in_store
+        WHERE
+            is_in = 1
+        GROUP BY
+            month
+        ORDER BY
+            month;
+    </select>
+    <select id="getOutStorage" resultType="com.pn.vo.InOutStorageVO">
+        SELECT
+            MONTH(create_time) AS month,
+            SUM(out_num) AS total
+        FROM
+            out_store
+        WHERE
+            is_out = 1
+        GROUP BY
+            month
+        ORDER BY
+            month;
+    </select>
 </mapper>

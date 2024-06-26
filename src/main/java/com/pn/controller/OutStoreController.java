@@ -10,10 +10,7 @@ import com.pn.utils.CurrentUser;
 import com.pn.utils.TokenUtils;
 import com.pn.utils.WarehouseConstants;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -87,6 +84,8 @@ public class OutStoreController {
 
     /**
      * 确定出库的url接口/outstore/outstore-confirm
+     * @param outStore
+     * @return
      */
     @RequestMapping("/outstore-confirm")
     public Result confirmOutStore(@RequestBody OutStore outStore){
@@ -94,5 +93,16 @@ public class OutStoreController {
         Result result = outStoreService.confirmOutStore(outStore);
         //响应
         return result;
+    }
+    /**
+     * 导出出库列表数据
+     * @param outStore,page
+     * @return
+     * */
+    @GetMapping("/exportTable")
+    public Result exportTable(Page page, OutStore outStore){
+        page = outStoreService.outStorePage(page, outStore);
+        List<?> list = page.getResultList();
+        return Result.ok(list);
     }
 }

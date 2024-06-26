@@ -187,4 +187,10 @@ public class UserController {
 		List<Auth> authTree = authService.findAuthTree(userId);
 		return Result.ok(authTree);
 	}
+	@GetMapping("/exportTable")
+	public Result exportTable(Page page, User user){
+		page = userService.queryUserPage(page,user);
+		List<?> list = page.getResultList();
+		return Result.ok(list);
+	}
 }
