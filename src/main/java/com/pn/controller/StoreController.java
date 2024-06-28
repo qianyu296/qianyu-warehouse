@@ -5,6 +5,7 @@ import com.pn.entity.Store;
 import com.pn.page.Page;
 import com.pn.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,7 +55,7 @@ public class StoreController {
      * @RequestBody Store store将请求传递的json数据封装到参数Store对象;
      */
     @RequestMapping("/store-add")
-    public Result addStore(@RequestBody Store store){
+    public Result addStore(@Validated @RequestBody Store store){
         //执行业务
         Result result = storeService.saveStore(store);
         //响应
@@ -67,7 +68,7 @@ public class StoreController {
      * @RequestBody Store store将请求传递的json数据封装到参数Store对象;
      */
     @RequestMapping("/store-update")
-    public Result updateStore(@RequestBody Store store){
+    public Result updateStore(@Validated @RequestBody Store store){
         //执行业务
         Result result = storeService.updateStore(store);
         //响应

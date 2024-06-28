@@ -3,6 +3,9 @@ package com.pn.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.ToString;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.Date;
 
 /**
@@ -13,11 +16,11 @@ import java.util.Date;
 public class User {
 
 	private int userId;//用户id
-
+	@Pattern(regexp = "^[0-9a-zA-Z]{4,20}$",message = "账号输入错误")
 	private String userCode;//账号
-
-	private String userName;//用户名
-
+	@Pattern(regexp = "^[\\u4e00-\\u9fff\\w]{1,20}$",message = "昵称输入错误")
+	private String userName;//昵称
+	@Pattern(regexp = "^\\w{4,18}$",message = "密码输入错误")
 	private String userPwd;//用户密码
 
 	private String userType;//用户类型
@@ -25,7 +28,6 @@ public class User {
 	private String userState;//用户状态
 
 	private String isDelete;//删除状态
-
 	private int createBy;//创建人id
 
 	//返回前端时,自动将Date转换成指定格式的json字符串

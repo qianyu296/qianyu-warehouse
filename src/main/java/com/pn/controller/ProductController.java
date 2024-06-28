@@ -233,8 +233,6 @@ public class ProductController {
     }
     /**
      * 批量删除产品
-     * @param productListDto
-     * @return
      * */
     @DeleteMapping("/product-list-delete")
     public Result deleteProductList(/*@RequestBody ProductListDto productListDto*/@RequestBody List<Integer> list){

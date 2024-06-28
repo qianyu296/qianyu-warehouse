@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.util.List;
 
@@ -16,15 +18,17 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 public class ProductType implements Serializable {
-
+    @NotNull
     private Integer typeId;//分类id
 
     private Integer parentId;//上级分类id
-
+    @NotNull
+    @Pattern(regexp = "^[\\w]{4,20}$")
     private String typeCode;//分类代码
-
+    @NotNull
+    @Pattern(regexp = "^[\\u4e00-\\u9fff0-9a-zA-Z]{1,20}$")
     private String typeName;//分类名称
-
+    @Pattern(regexp = "^[.]{1,500}$")
     private String typeDesc;//分类描述
 
     //自定义List<ProductType>集合属性,用于存储当前分类的所有子级分类

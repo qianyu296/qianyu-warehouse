@@ -9,6 +9,7 @@ import com.pn.page.Page;
 import com.pn.service.*;
 import com.pn.utils.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -71,7 +72,7 @@ public class UserController {
 	 * 将请求头Token的值即客户端归还的token赋值给参数变量token;
 	 */
 	@RequestMapping("/addUser")
-	public Result addUser(@RequestBody User user,
+	public Result addUser(@Validated @RequestBody User user,
 						  @RequestHeader(WarehouseConstants.HEADER_TOKEN_NAME) String token){
 		//获取当前登录的用户
 		CurrentUser currentUser = tokenUtils.getCurrentUser(token);
@@ -153,7 +154,7 @@ public class UserController {
 	 * 将请求头Token的值即客户端归还的token赋值给参数变量token;
 	 */
 	@RequestMapping("/updateUser")
-	public Result updateUser(@RequestBody User user,
+	public Result updateUser(@Validated @RequestBody User user,
 							 @RequestHeader(WarehouseConstants.HEADER_TOKEN_NAME) String token){
 		//获取当前登录的用户
 		CurrentUser currentUser = tokenUtils.getCurrentUser(token);

@@ -3,6 +3,8 @@ package com.pn.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import javax.validation.constraints.Pattern;
 import java.util.Date;
 import java.util.List;
 

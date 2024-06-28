@@ -8,6 +8,7 @@ import com.pn.mapper.RoleMapper;
 import com.pn.page.Page;
 import com.pn.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +24,9 @@ public class RoleServiceImpl implements RoleService {
     //注入AuthMapper
     @Autowired
     private AuthMapper authMapper;
+
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
 
     //查询所有角色的业务方法
     @Override
@@ -47,9 +51,10 @@ public class RoleServiceImpl implements RoleService {
         //拿到给用户分配的所有角色名
         List<String> roleNameList = assignRoleDto.getRoleCheckList();
 
-        //根据用户id删除给用户已分配的所有角色
+        // 根据用户id删除给用户已分配的所有角色
         roleMapper.delRoleByUserId(userId);
-
+        // 根据用户id删除redis中缓存
+        stringRedisTemplate.delete(userId + ":authTree");
         //循环添加用户角色关系
         for (String roleName : roleNameList) {
             //根据当前角色名查询当前角色的id
