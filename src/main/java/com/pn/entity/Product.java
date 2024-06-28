@@ -26,12 +26,12 @@ public class Product {
     private String storeName;//非表中字段 --商品所在仓库名称
     @NotNull
     private Integer brandId;//商品所属品牌id
-    @NotNull
+
     private String brandName;//非表中字段 -- 商品所属品牌名称
     @NotNull
     @Pattern(regexp = "^[\\u4e00-\\u9fff0-9a-zA-Z]{1,20}$")
     private String productName;//商品名称
-    @Pattern(regexp = "^[0-9a-zA-Z]{4,20}$")
+    @Pattern(regexp = "^[0-9a-zA-Z]{4,10}$")
     private String productNum;//商品编码
 
     private Integer productInvent;//商品库存
@@ -51,14 +51,14 @@ public class Product {
     private Integer unitId;//商品单位id
     @NotNull
     private String unitName;//非表中字段 -- 商品单位名称
-    @Pattern(regexp = "^[.]{1,500}$")
+    @Pattern(regexp = "^[.]{0,500}$")
     private String introduce;//商品介绍
 
     private String upDownState;//商品上下架状态,1.上架,0.下架
 
-    @Pattern(regexp = "^[0-9]+(\\.[0-9]{2})?$")
+    @Pattern(regexp = "^[0-9]{0,9}(\\.[0-9]{1,2})?$")
     private Double inPrice;//商品进价
-    @Pattern(regexp = "^[0-9]+(\\.[0-9]{2})?$")
+    @Pattern(regexp = "^[0-9]{0,9}(\\.[0-9]{1,2})?$")
     private Double salePrice;//商品售价
 
     private Double memPrice;//商品会员价

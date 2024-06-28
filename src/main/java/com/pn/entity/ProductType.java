@@ -23,12 +23,12 @@ public class ProductType implements Serializable {
 
     private Integer parentId;//上级分类id
     @NotNull
-    @Pattern(regexp = "^[\\w]{4,20}$")
-    private String typeCode;//分类代码
+    @Pattern(regexp = "^[a-zA-Z0-9]{4,20}$")
+    private String typeCode;//分类编码
     @NotNull
     @Pattern(regexp = "^[\\u4e00-\\u9fff0-9a-zA-Z]{1,20}$")
     private String typeName;//分类名称
-    @Pattern(regexp = "^[.]{1,500}$")
+    @Pattern(regexp = "^.{0,500}$")
     private String typeDesc;//分类描述
 
     //自定义List<ProductType>集合属性,用于存储当前分类的所有子级分类

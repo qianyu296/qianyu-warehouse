@@ -22,12 +22,13 @@ public class Store implements Serializable {
 
     private Integer storeId;//仓库id
     @NotNull
-    @Pattern(regexp = "^[\\u4e00-\\u9fff0-9a-zA-Z_]{4,20}$")
+    @Pattern(regexp = "^[\\u4e00-\\u9fff0-9a-zA-Z_]{2,20}$")
     private String storeName;//仓库名称
     @NotNull
-    @Pattern(regexp = "^\\w{4,20}$")
-    private String storeNum;//仓库编码
-    @Pattern(regexp = "^[\\u4e00-\\u9fff0-9a-zA-Z_]{0,20}$")
+    @Pattern(regexp = "^[a-zA-Z0-9]{4,20}$")
+    private String storeNum;//仓库编号
+    @NotNull
+    @Pattern(regexp = "^[\\u4e00-\\u9fff0-9a-zA-Z_]{1,20}$")
     private String storeAddress;//仓库地址
     @Pattern(regexp = "^[\\u4e00-\\u9fffa-zA-Z]{0,20}$")
     private String concat;//仓库联系人
