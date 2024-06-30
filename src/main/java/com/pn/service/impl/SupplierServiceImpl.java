@@ -1,5 +1,6 @@
 package com.pn.service.impl;
 
+import com.pn.entity.Result;
 import com.pn.entity.Store;
 import com.pn.entity.Supplier;
 import com.pn.mapper.SupplierMapper;
@@ -42,6 +43,21 @@ public class SupplierServiceImpl implements SupplierService {
         page.setTotalNum(count);
         page.setResultList(stores);
         return page;
+    }
+    /**
+     * 删除供应商
+     * @param supplierId
+     * @return Result
+     * */
+    @Override
+    public Result supplierDelete(Integer supplierId) {
+        // 首先判断该供应商是否有流转中单据，如果有，那么不删除，如果没有，那么删除
+        Integer count = supplierMapper.selectSupplierIsBuy(supplierId);
+        if(count == 0){
+            supplierMapper.deleteSupplier(supplierId);
+            return Result.ok("删除供应商成功");
+        }
+        return Result.err(Result.CODE_ERR_SYS,"该供应商存在流转中单据，无法删除！");
     }
 
 }

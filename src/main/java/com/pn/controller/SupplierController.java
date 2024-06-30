@@ -5,9 +5,7 @@ import com.pn.entity.Supplier;
 import com.pn.page.Page;
 import com.pn.service.SupplierService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/supplier")
@@ -19,5 +17,9 @@ public class SupplierController {
         // System.out.println(supplier.toString());
         page = supplierService.querySupplyPage(page, supplier);
         return Result.ok(page);
-    };
+    }
+    @DeleteMapping("/supplier-delete/{supplierId}")
+    public Result supplierDelete(@PathVariable Integer supplierId){
+         return supplierService.supplierDelete(supplierId);
+    }
 }
