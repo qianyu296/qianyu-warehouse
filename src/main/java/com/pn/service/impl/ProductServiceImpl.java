@@ -48,7 +48,7 @@ public class ProductServiceImpl implements ProductService {
     public Result saveProduct(Product product) {
 
         //处理上传的图片的访问地址 -- /img/upload/图片名称
-        product.setImgs(accessPath+product.getImgs());
+        product.setImgs(product.getImgs());
 
         //添加商品
         int i = productMapper.insertProduct(product);
@@ -92,9 +92,9 @@ public class ProductServiceImpl implements ProductService {
           被修改了即上传了新的图片,那么product对象的imgs属性值只是图片的名称,
           则给图片名称前拼接/img/upload构成商品新上传的图片的访问地址;
          */
-        if(!product.getImgs().startsWith(accessPath)){
-            product.setImgs(accessPath+product.getImgs());
-        }
+
+            product.setImgs(product.getImgs());
+
         //根据商品id修改商品信息
         int i = productMapper.updateProductById(product);
         if(i>0){

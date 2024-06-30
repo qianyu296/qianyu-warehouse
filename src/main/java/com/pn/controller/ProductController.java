@@ -4,9 +4,11 @@ import com.pn.dto.ProductListDto;
 import com.pn.entity.*;
 import com.pn.page.Page;
 import com.pn.service.*;
+import com.pn.utils.AliOssUtil;
 import com.pn.utils.CurrentUser;
 import com.pn.utils.TokenUtils;
 import com.pn.utils.WarehouseConstants;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.ResourceUtils;
@@ -16,9 +18,11 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/product")
+@Slf4j
 public class ProductController {
 
     //注入StoreService
@@ -52,6 +56,15 @@ public class ProductController {
     //注入TokenUtils
     @Autowired
     private TokenUtils tokenUtils;
+
+    @Value("${alioss.endpoint}")
+    private String endpoint;
+    @Value("${alioss.access-key-id}")
+    private String accessKeyId;
+    @Value("${alioss.access-key-secret}")
+    private String accessKeySecret;
+    @Value("${alioss.bucket-name}")
+    private String bucketName;
 
     /**
      * 查询所有仓库的url接口/product/store-list
@@ -166,22 +179,25 @@ public class ProductController {
     @CrossOrigin
     @PostMapping("/img-upload")
     public Result uploadImg(MultipartFile file){
-
+        AliOssUtil aliOssUtil = new AliOssUtil(endpoint,accessKeyId,accessKeySecret,bucketName);
+        log.info("文件上传:{}",file);
+        String name = file.getOriginalFilename();
+        // 获取原本文件的后缀名
+        String endName = ".";
+        assert name != null;
+        endName += name.substring(name.lastIndexOf("."));
+        // 生成一个UUID作为上传文件的文件名,防止上传文件的文件名冲突导致文件覆盖
+        String filename = UUID.randomUUID() + endName;
+        // 上传之后的访问地址
+        String fileUrl = "";
         try {
-            //拿到图片上传到的目录(类路径classes下的static/img/upload)的File对象
-            File uploadDirFile = ResourceUtils.getFile(uploadPath);
-            //拿到图片上传到的目录的磁盘路径
-            String uploadDirPath = uploadDirFile.getAbsolutePath();
-            //拿到图片保存到的磁盘路径
-            String fileUploadPath = uploadDirPath + "\\" + file.getOriginalFilename();
-            //保存图片
-            file.transferTo(new File(fileUploadPath));
-            //成功响应
-            return Result.ok("图片上传成功！");
+            // 文件上传
+            fileUrl = aliOssUtil.upload(file.getBytes(), filename);
+            return Result.ok(fileUrl);
         } catch (IOException e) {
-            //失败响应
-            return Result.err(Result.CODE_ERR_BUSINESS, "图片上传失败！");
+            log.info("文件上传失败:{}",e.getMessage());
         }
+        return Result.err(Result.CODE_ERR_SYS,"文件上传失败");
     }
 
     /**
