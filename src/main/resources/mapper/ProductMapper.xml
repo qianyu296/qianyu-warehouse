@@ -10,7 +10,7 @@
     -->
     <select id="selectProductCount" resultType="integer">
         select count(*) from
-        product t1, store t2, brand t3, product_type t4, supply t5,
+        product t1, store t2, brand t3, product_type t4, supplier t5,
         place t6, unit t7
         where t1.store_id = t2.store_id and t1.brand_id = t3.brand_id
         and t1.type_id = t4.type_id and t1.supply_id = t5.supply_id
@@ -57,7 +57,7 @@
     <select id="selectProductPage" resultType="com.pn.entity.Product">
         select t1.*, t2.store_name, t3.brand_name, t4.type_name,
         t5.supply_name, t6.place_name, t7.unit_name from
-        product t1, store t2, brand t3, product_type t4, supply t5,
+        product t1, store t2, brand t3, product_type t4, supplier t5,
         place t6, unit t7
         where t1.store_id = t2.store_id and t1.brand_id = t3.brand_id
         and t1.type_id = t4.type_id and t1.supply_id = t5.supply_id

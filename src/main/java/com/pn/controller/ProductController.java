@@ -1,6 +1,5 @@
 package com.pn.controller;
 
-import com.pn.dto.ProductListDto;
 import com.pn.entity.*;
 import com.pn.page.Page;
 import com.pn.service.*;
@@ -11,11 +10,9 @@ import com.pn.utils.WarehouseConstants;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
@@ -39,7 +36,7 @@ public class ProductController {
 
     //注入SupplyService
     @Autowired
-    private SupplyService supplyService;
+    private SupplierService supplierService;
 
     //注入PlaceService
     @Autowired
@@ -108,14 +105,14 @@ public class ProductController {
     /**
      * 查询所有供应商的url接口/product/supply-list
      *
-     * 返回值Result对象给客户端响应查询到的List<Supply>;
+     * 返回值Result对象给客户端响应查询到的List<Supplier>;
      */
     @RequestMapping("/supply-list")
     public Result supplyList(){
         //执行业务
-        List<Supply> supplyList = supplyService.queryAllSupply();
+        List<Supplier> supplierList = supplierService.queryAllSupply();
         //响应
-        return Result.ok(supplyList);
+        return Result.ok(supplierList);
     }
 
     /**

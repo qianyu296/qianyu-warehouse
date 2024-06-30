@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pn.mapper.SupplierMapper">
+
+    <!--
+      //查询所有供应商的方法
+      public List<Supplier> findAllSupply()
+    -->
+    <select id="findAllSupply" resultType="com.pn.entity.Supplier">
+        select * from supplier
+    </select>
+    <!--分页查询供应商-->
+    <select id="selectSupplyPage" resultType="com.pn.entity.Supplier">
+        select * from supplier
+        <where>
+            <if test="supplier.supplierName != null and supplier.supplierName != ''">
+                and supplier_name like concat('%', #{supplier.supplierName}, '%')
+            </if>
+            <if test="supplier.concat != null and supplier.concat != ''">
+                and concat like concat('%', #{supplier.concat}, '%')
+            </if>
+        </where>
+        limit #{page.limitIndex}, #{page.pageSize}
+    </select>
+</mapper>
