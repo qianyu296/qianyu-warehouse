@@ -30,7 +30,7 @@ public class Purchase {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date buyTime;//采购时间
 
-    private Integer supplyId;//采购单采购的商品的供应商id
+    private Integer supplierId;//采购单采购的商品的供应商id
 
     private Integer placeId;//采购单采购的商品的产地id
 

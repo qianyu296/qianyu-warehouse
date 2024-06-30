@@ -33,14 +33,14 @@ public class PurchaseAddDTO {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date buyTime;//采购时间
     @NotNull
-    private Integer supplyId;//采购单采购的商品的供应商id
+    private Integer supplierId;//采购单采购的商品的供应商id
     @NotNull
     private Integer placeId;//采购单采购的商品的产地id
     @NotNull
     @Pattern(regexp = "^[\\u4e00-\\u9fffa-zA-Z]{1,20}$")
     private String buyUser;//采购人
     @NotNull
-    @Pattern(regexp = "\\d{11}")
+    @Pattern(regexp = "1[0-9]{10}")
     private String phone;//采购人联系电话
 
     private String isIn;//是否生成入库单,1.是,0.否

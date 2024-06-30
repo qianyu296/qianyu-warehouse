@@ -25,7 +25,7 @@ public class SupplierServiceImpl implements SupplierService {
       查询所有供应商的业务方法
      */
     //对查询到的所有供应商进行缓存,缓存到redis的键为all:supply
-    @Cacheable(key = "'all:supply'")
+    @Cacheable(key = "'all:supplier'")
     @Override
     public List<Supplier> queryAllSupply() {
         //查询所有供应商

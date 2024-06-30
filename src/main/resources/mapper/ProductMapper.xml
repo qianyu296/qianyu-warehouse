@@ -13,7 +13,7 @@
         product t1, store t2, brand t3, product_type t4, supplier t5,
         place t6, unit t7
         where t1.store_id = t2.store_id and t1.brand_id = t3.brand_id
-        and t1.type_id = t4.type_id and t1.supply_id = t5.supply_id
+        and t1.type_id = t4.type_id and t1.supplier_id = t5.supplier_id
         and t1.place_id = t6.place_id and t1.unit_id = t7.unit_id
         <if test="storeId != null">
             and t1.store_id = #{storeId}
@@ -27,8 +27,8 @@
         <if test="typeName != null and typeName != ''">
             and t4.type_name like concat('%', #{typeName}, '%')
         </if>
-        <if test="supplyName != null and supplyName != ''">
-            and t5.supply_name like concat('%', #{supplyName}, '%')
+        <if test="supplierName != null and supplierName != ''">
+            and t5.supplier_name like concat('%', #{supplierName}, '%')
         </if>
         <if test="placeName != null and placeName != ''">
             and t6.place_name like concat('%', #{placeName}, '%')
@@ -56,11 +56,11 @@
     -->
     <select id="selectProductPage" resultType="com.pn.entity.Product">
         select t1.*, t2.store_name, t3.brand_name, t4.type_name,
-        t5.supply_name, t6.place_name, t7.unit_name from
+        t5.supplier_name, t6.place_name, t7.unit_name from
         product t1, store t2, brand t3, product_type t4, supplier t5,
         place t6, unit t7
         where t1.store_id = t2.store_id and t1.brand_id = t3.brand_id
-        and t1.type_id = t4.type_id and t1.supply_id = t5.supply_id
+        and t1.type_id = t4.type_id and t1.supplier_id = t5.supplier_id
         and t1.place_id = t6.place_id and t1.unit_id = t7.unit_id
         <if test="product.storeId != null">
             and t1.store_id = #{product.storeId}
@@ -74,8 +74,8 @@
         <if test="product.typeName != null and product.typeName != ''">
             and t4.type_name like concat('%', #{product.typeName}, '%')
         </if>
-        <if test="product.supplyName != null and product.supplyName != ''">
-            and t5.supply_name like concat('%', #{product.supplyName}, '%')
+        <if test="product.supplierName != null and product.supplierName != ''">
+            and t5.supplier_name like concat('%', #{product.supplierName}, '%')
         </if>
         <if test="product.placeName != null and product.placeName != ''">
             and t6.place_name like concat('%', #{product.placeName}, '%')
@@ -101,7 +101,7 @@
         insert into product values
         (
           null, #{storeId}, #{brandId}, #{productName}, #{productNum},
-          #{productInvent}, #{typeId}, #{supplyId}, #{placeId}, #{unitId},
+          #{productInvent}, #{typeId}, #{supplierId}, #{placeId}, #{unitId},
           #{introduce}, 0, #{inPrice}, #{salePrice}, #{memPrice}, now(),
           null, #{createBy}, null, #{imgs}, #{productDate}, #{suppDate}
         )
@@ -133,7 +133,7 @@
        update product set store_id = #{storeId}, brand_id = #{brandId},
        product_name = #{productName}, product_num = #{productNum},
        product_invent = #{productInvent}, type_id = #{typeId},
-       supply_id = #{supplyId}, place_id = #{placeId}, unit_id = #{unitId},
+       supplier_id = #{supplierId}, place_id = #{placeId}, unit_id = #{unitId},
        introduce = #{introduce}, in_price = #{inPrice}, sale_price = #{salePrice},
        mem_price = #{memPrice}, update_time = now(), update_by = #{updateBy},
        imgs = #{imgs}, product_date = #{productDate}, supp_date = #{suppDate}

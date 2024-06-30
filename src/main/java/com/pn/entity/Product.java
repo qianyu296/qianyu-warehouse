@@ -40,9 +40,9 @@ public class Product {
     @NotNull
     private String typeName;//非表中字段 -- 商品所属分类名称
     @NotNull
-    private Integer supplyId;//商品供应商id
+    private Integer supplierId;//商品供应商id
     @NotNull
-    private String supplyName;//非表中字段 -- 商品供应商名称
+    private String supplierName;//非表中字段 -- 商品供应商名称
     @NotNull
     private Integer placeId;//商品产地id
     @NotNull
