@@ -1,5 +1,6 @@
 package com.pn.controller;
 
+import com.pn.dto.OutStoreAddDTO;
 import com.pn.entity.OutStore;
 import com.pn.entity.Result;
 import com.pn.entity.Store;
@@ -39,7 +40,7 @@ public class OutStoreController {
      * 将请求头Token的值即客户端归还的token赋值给参数变量token;
      */
     @RequestMapping("/outstore-add")
-    public Result addOutStore(@Validated @RequestBody OutStore outStore,
+    public Result addOutStore(@Validated @RequestBody OutStoreAddDTO outStore,
                               @RequestHeader(WarehouseConstants.HEADER_TOKEN_NAME) String token){
 
         //获取当前登录的用户

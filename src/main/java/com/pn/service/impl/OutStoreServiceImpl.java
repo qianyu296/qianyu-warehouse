@@ -1,5 +1,6 @@
 package com.pn.service.impl;
 
+import com.pn.dto.OutStoreAddDTO;
 import com.pn.entity.OutStore;
 import com.pn.entity.Product;
 import com.pn.entity.Result;
@@ -26,7 +27,7 @@ public class OutStoreServiceImpl implements OutStoreService {
 
     //添加出库单的业务方法
     @Override
-    public Result saveOutStore(OutStore outStore) {
+    public Result saveOutStore(OutStoreAddDTO outStore) {
         //添加出库单
         int i = outStoreMapper.insertOutStore(outStore);
         if(i>0){
