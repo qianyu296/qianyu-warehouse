@@ -10,6 +10,7 @@ import com.pn.utils.CurrentUser;
 import com.pn.utils.TokenUtils;
 import com.pn.utils.WarehouseConstants;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -38,7 +39,7 @@ public class OutStoreController {
      * 将请求头Token的值即客户端归还的token赋值给参数变量token;
      */
     @RequestMapping("/outstore-add")
-    public Result addOutStore(@RequestBody OutStore outStore,
+    public Result addOutStore(@Validated @RequestBody OutStore outStore,
                               @RequestHeader(WarehouseConstants.HEADER_TOKEN_NAME) String token){
 
         //获取当前登录的用户

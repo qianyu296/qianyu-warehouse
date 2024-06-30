@@ -1,5 +1,7 @@
 package com.pn.service.impl;
 
+import com.pn.dto.PurchaseAddDTO;
+import com.pn.dto.PurchaseUpdateDTO;
 import com.pn.entity.Purchase;
 import com.pn.entity.Result;
 import com.pn.mapper.PurchaseMapper;
@@ -19,7 +21,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 
     //添加采购单的业务方法
     @Override
-    public Result savePurchase(Purchase purchase) {
+    public Result savePurchase(PurchaseAddDTO purchase) {
         //添加采购单
         int i = purchaseMapper.insertPurchase(purchase);
         if(i>0){
@@ -47,7 +49,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 
     //修改采购单的业务方法
     @Override
-    public Result updatePurchase(Purchase purchase) {
+    public Result updatePurchase(PurchaseUpdateDTO purchase) {
         //根据id修改采购单
         int i = purchaseMapper.updatePurchaseById(purchase);
         if(i>0){

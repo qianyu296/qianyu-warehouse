@@ -1,5 +1,7 @@
 package com.pn.mapper;
 
+import com.pn.dto.PurchaseAddDTO;
+import com.pn.dto.PurchaseUpdateDTO;
 import com.pn.entity.ProductType;
 import com.pn.entity.Purchase;
 import com.pn.page.Page;
@@ -10,7 +12,7 @@ import java.util.List;
 public interface PurchaseMapper {
 
     //添加采购单的方法
-    public int insertPurchase(Purchase purchase);
+    public int insertPurchase(PurchaseAddDTO purchase);
 
     //查询采购单总行数的方法
     public int selectPurchaseCount(Purchase purchase);
@@ -19,7 +21,7 @@ public interface PurchaseMapper {
     public List<Purchase> selectPurchasePage(@Param("page") Page page, @Param("purchase") Purchase purchase);
 
     //根据id修改采购单的方法
-    public int updatePurchaseById(Purchase purchase);
+    public int updatePurchaseById(PurchaseUpdateDTO purchase);
 
     //根据id删除采购单的方法
     public int deletePurchaseById(Integer buyId);

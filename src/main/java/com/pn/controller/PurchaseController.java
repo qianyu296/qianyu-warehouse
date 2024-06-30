@@ -1,5 +1,7 @@
 package com.pn.controller;
 
+import com.pn.dto.PurchaseAddDTO;
+import com.pn.dto.PurchaseUpdateDTO;
 import com.pn.entity.InStore;
 import com.pn.entity.Purchase;
 import com.pn.entity.Result;
@@ -12,6 +14,7 @@ import com.pn.utils.CurrentUser;
 import com.pn.utils.TokenUtils;
 import com.pn.utils.WarehouseConstants;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -40,7 +43,7 @@ public class PurchaseController {
      * 添加采购单的url接口/purchase/purchase-add
      */
     @RequestMapping("/purchase-add")
-    public Result addPurchase(@RequestBody Purchase purchase){
+    public Result addPurchase(@Validated @RequestBody PurchaseAddDTO purchase){
         //执行业务
         Result result = purchaseService.savePurchase(purchase);
         //响应
@@ -81,7 +84,7 @@ public class PurchaseController {
      * @RequestBody Purchase purchase将请求传递的json数据封装到参数Purchase对象;
      */
     @RequestMapping("/purchase-update")
-    public Result updatePurchase(@RequestBody Purchase purchase){
+    public Result updatePurchase(@Validated @RequestBody PurchaseUpdateDTO purchase){
         //执行业务
         Result result = purchaseService.updatePurchase(purchase);
         //响应
