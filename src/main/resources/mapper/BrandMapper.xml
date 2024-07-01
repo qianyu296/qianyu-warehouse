@@ -11,5 +11,15 @@
     <select id="findAllBrand" resultType="com.pn.entity.Brand">
         select * from brand
     </select>
+    <!--分页查询商品品牌-->
+    <select id="selectBrandPage" resultType="com.pn.entity.Brand">
+        select * from brand
+        <where>
+            <if test="brand.brandName != null and brand.brandName != ''">
+                and brand_name like concat('%', #{brand.brandName}, '%')
+            </if>
+        </where>
+        limit #{page.limitIndex}, #{page.pageSize}
+    </select>
 
 </mapper>

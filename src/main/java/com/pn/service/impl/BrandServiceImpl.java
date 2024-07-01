@@ -1,7 +1,11 @@
 package com.pn.service.impl;
 
+import com.pn.dto.BrandAddDTO;
+import com.pn.dto.BrandUpdateDTO;
 import com.pn.entity.Brand;
+import com.pn.entity.Result;
 import com.pn.mapper.BrandMapper;
+import com.pn.page.Page;
 import com.pn.service.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
@@ -28,5 +32,40 @@ public class BrandServiceImpl implements BrandService {
     public List<Brand> queryAllBrand() {
         //查询所有品牌
         return brandMapper.findAllBrand();
+    }
+
+    @Override
+    public Page getBrandPage(Page page, Brand brand) {
+        List<Brand> brands = brandMapper.selectBrandPage(page, brand);
+        page.setTotalNum(brands.size());
+        page.setResultList(brands);
+        return page;
+    }
+
+    @Override
+    public Result brandAdd(BrandAddDTO brand) {
+        Integer i = brandMapper.brandAdd(brand);
+        if(i == 0){
+            return Result.err(Result.CODE_ERR_SYS, "新增品牌失败");
+        }
+        return Result.ok("新增供应商成功");
+    }
+
+    @Override
+    public Result brandDelete(Integer brandId) {
+        Integer i = brandMapper.brandDelete(brandId);
+        if(i == 0){
+            return Result.err(Result.CODE_ERR_SYS, "删除品牌失败");
+        }
+        return Result.ok("删除品牌成功");
+    }
+
+    @Override
+    public Result brandUpdate(BrandUpdateDTO brandUpdateDTO) {
+        Integer i = brandMapper.brandUpdate(brandUpdateDTO);
+        if(i == 0){
+            return Result.err(Result.CODE_ERR_SYS, "修改品牌失败");
+        }
+        return Result.ok("修改品牌成功");
     }
 }
