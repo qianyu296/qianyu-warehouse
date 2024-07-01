@@ -11,5 +11,23 @@
     <select id="findAllUnit" resultType="com.pn.entity.Unit">
         select * from unit
     </select>
+    <select id="selectUnitPage" resultType="com.pn.entity.Unit">
+        select * from unit
+        <where>
+            <if test="unit.unitName != null and unit.unitName != ''">
+                and unit_name like concat('%', #{unit.unitName}, '%')
+            </if>
+        </where>
+        limit #{page.limitIndex}, #{page.pageSize}
+    </select>
+    <select id="selectUnitCount" resultType="integer">
+        select count(*) from unit
+        <where>
+            <if test="unit.unitName != null and unit.unitName != ''">
+                and unit_name like concat('%', #{unit.unitName}, '%')
+            </if>
+        </where>
+    </select>
+
 
 </mapper>
