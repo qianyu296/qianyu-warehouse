@@ -74,4 +74,15 @@ public class BrandController {
     public Result brandUpdate(@Validated @RequestBody BrandUpdateDTO brandUpdateDTO){
         return brandService.brandUpdate(brandUpdateDTO);
     }
+    /**
+     * 导出数据
+     * @param brand, page
+     * @return
+     * */
+    @GetMapping("/exportTable")
+    public Result exportTable(Page page, Brand brand){
+        page = brandService.getBrandPage(page, brand);
+        List<?> list = page.getResultList();
+        return Result.ok(list);
+    }
 }
