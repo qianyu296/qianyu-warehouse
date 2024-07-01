@@ -36,8 +36,9 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public Page getBrandPage(Page page, Brand brand) {
+        Integer i = selectBrandCount(page, brand);
         List<Brand> brands = brandMapper.selectBrandPage(page, brand);
-        page.setTotalNum(brands.size());
+        page.setTotalNum(i);
         page.setResultList(brands);
         return page;
     }
@@ -67,5 +68,10 @@ public class BrandServiceImpl implements BrandService {
             return Result.err(Result.CODE_ERR_SYS, "修改品牌失败");
         }
         return Result.ok("修改品牌成功");
+    }
+
+    @Override
+    public Integer selectBrandCount(Page page, Brand brand) {
+        return brandMapper.selectBrandCount(page, brand);
     }
 }

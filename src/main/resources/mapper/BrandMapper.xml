@@ -21,5 +21,13 @@
         </where>
         limit #{page.limitIndex}, #{page.pageSize}
     </select>
+    <select id="selectBrandCount" resultType="integer">
+        select count(*) from brand
+        <where>
+            <if test="brand.brandName != null and brand.brandName != ''">
+                and brand_name like concat('%', #{brand.brandName}, '%')
+            </if>
+        </where>
+    </select>
 
 </mapper>

@@ -16,4 +16,5 @@ public interface BrandService {
     public Result brandAdd(BrandAddDTO brand);
     public Result brandDelete(Integer brandId);
     public Result brandUpdate(BrandUpdateDTO brandUpdateDTO);
+    public Integer selectBrandCount(Page page, Brand brand);
 }

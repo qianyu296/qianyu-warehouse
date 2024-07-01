@@ -19,4 +19,5 @@ public interface BrandMapper {
     public Integer brandDelete(Integer brandId);
     @Update("update brand set brand_name = #{brandName},brand_leter = #{brandLeter},brand_desc = #{brandDesc} where brand_id = #{brandId}")
     public Integer brandUpdate(BrandUpdateDTO brandUpdateDTO);
+    public Integer selectBrandCount(@Param("page") Page page,@Param("brand") Brand brand);
 }
