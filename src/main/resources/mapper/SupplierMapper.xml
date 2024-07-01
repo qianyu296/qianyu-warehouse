@@ -9,7 +9,7 @@
       public List<Supplier> findAllSupply()
     -->
     <select id="findAllSupply" resultType="com.pn.entity.Supplier">
-        select * from supplier
+        select * from supplier where is_delete = 0
     </select>
     <!--分页查询供应商-->
     <select id="selectSupplyPage" resultType="com.pn.entity.Supplier">
@@ -21,6 +21,7 @@
             <if test="supplier.concat != null and supplier.concat != ''">
                 and concat like concat('%', #{supplier.concat}, '%')
             </if>
+                is_delete = 0
         </where>
         limit #{page.limitIndex}, #{page.pageSize}
     </select>

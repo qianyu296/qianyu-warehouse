@@ -103,6 +103,16 @@ public class AuthServiceImp implements AuthService {
 		for (Integer authId : authIds) {
 			authMapper.insertRoleAuth(roleId, authId);
 		}
+		// 更改所有绑定该角色的用户id所绑定的redis权限树
+		List<Integer> roleUser = authMapper.getRoleUser(roleId);
+        for (Integer userId : roleUser) {
+            List<Auth> allAuthList = authMapper.findAllAuth(userId);
+            //将所有权限(菜单)List<Auth>转成权限(菜单)树List<Auth>
+            List<Auth> authTreeList = allAuthToAuthTree(allAuthList, 0);
+            //将权限(菜单)树List<Auth>转成json串并保存到redis
+            redisTemplate.opsForValue().set(userId + ":authTree", JSON.toJSONString(authTreeList));
+        }
+
 	}
 
 }

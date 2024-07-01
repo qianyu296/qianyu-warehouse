@@ -1,5 +1,7 @@
 package com.pn.service.impl;
 
+import com.pn.dto.SupplierAddDTO;
+import com.pn.dto.SupplierUpdateDTO;
 import com.pn.entity.Result;
 import com.pn.entity.Store;
 import com.pn.entity.Supplier;
@@ -58,6 +60,29 @@ public class SupplierServiceImpl implements SupplierService {
             return Result.ok("删除供应商成功");
         }
         return Result.err(Result.CODE_ERR_SYS,"该供应商存在流转中单据，无法删除！");
+    }
+
+    @Override
+    public Result supplierAdd(SupplierAddDTO supplier) {
+        // 首先判断供应商编号是否唯一
+        Integer count = supplierMapper.supplierNumCheck(supplier.getSupplierNum());
+        if(count != 0){
+            return Result.err(Result.CODE_ERR_SYS, "该供应商编号已存在！");
+        }
+        Integer i = supplierMapper.supplierAdd(supplier);
+        if(i == 0){
+            return Result.err(Result.CODE_ERR_SYS, "系统错误");
+        }
+        return Result.ok("添加供应商成功！");
+    }
+
+    @Override
+    public Result supplierUpdate(SupplierUpdateDTO supplierUpdateDTO) {
+        Integer count = supplierMapper.supplierUpdate(supplierUpdateDTO);
+        if(count != 0){
+            return Result.ok("修改供应商成功");
+        }
+        return Result.err(Result.CODE_ERR_SYS,"系统错误");
     }
 
 }

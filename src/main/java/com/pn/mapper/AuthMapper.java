@@ -2,6 +2,10 @@ package com.pn.mapper;
 
 import java.util.List;
 import com.pn.entity.Auth;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+
+@Mapper
 
 public interface AuthMapper {
 
@@ -16,5 +20,8 @@ public interface AuthMapper {
 
 	//添加角色权限(菜单)关系的方法
 	public void insertRoleAuth(Integer roleId, Integer authId);
+	// 根据角色id查询绑定该角色id的用户
+	@Select("select user_id from user_role where role_id = #{roleId}")
+	public List<Integer> getRoleUser(Integer roleId);
 
 }
