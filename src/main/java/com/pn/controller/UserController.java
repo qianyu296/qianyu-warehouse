@@ -128,7 +128,10 @@ public class UserController {
 	 * 封装到参数AssignRoleDto对象中;
 	 */
 	@RequestMapping("/assignRole")
-	public Result assignRole(@RequestBody AssignRoleDto assignRoleDto){
+	public Result assignRole(@Validated @RequestBody AssignRoleDto assignRoleDto){
+		if(assignRoleDto.getUserId() == null){
+			return Result.err(Result.CODE_ERR_SYS,"用户id不能为空");
+		}
 		//执行业务
 		roleService.assignRole(assignRoleDto);
 		//响应

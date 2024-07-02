@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -15,7 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 public class AssignRoleDto {
-
+    @NotNull
     //接收请求参数userId -- 用户id
     private Integer userId;
 

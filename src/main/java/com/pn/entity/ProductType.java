@@ -23,7 +23,7 @@ public class ProductType implements Serializable {
 
     private Integer parentId;//上级分类id
     @NotNull
-    @Pattern(regexp = "^[a-zA-Z0-9]{4,20}$")
+    @Pattern(regexp = "^[a-zA-Z0-9]{2,20}$")
     private String typeCode;//分类编码
     @NotNull
     @Pattern(regexp = "^[\\u4e00-\\u9fff0-9a-zA-Z]{1,20}$")

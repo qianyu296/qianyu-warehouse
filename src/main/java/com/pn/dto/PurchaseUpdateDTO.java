@@ -34,8 +34,8 @@ public class PurchaseUpdateDTO {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date buyTime;//采购时间
 
-    @NotNull
-    private Integer placeId;//采购单采购的商品的产地id
+    // @NotNull
+    // private Integer placeId;//采购单采购的商品的产地id
     @NotNull
     @Pattern(regexp = "^[\\u4e00-\\u9fffa-zA-Z]{1,20}$")
     private String buyUser;//采购人

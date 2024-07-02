@@ -11,7 +11,7 @@
     <insert id="insertPurchase">
         insert into buy_list values(
           null, #{productId}, #{storeId}, #{buyNum}, null, now(),
-          #{supplierId}, #{placeId}, #{buyUser}, #{phone}, 0
+          #{supplierId}, #{buyUser}, #{phone}, 0
         )
     </insert>
 

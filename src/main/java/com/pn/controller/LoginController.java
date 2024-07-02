@@ -55,7 +55,7 @@ public class LoginController {
 					return Result.err(Result.CODE_ERR_BUSINESS, "密码不正确！");
 				}
 			} else {//查到的用户状态是未审核
-				return Result.err(Result.CODE_ERR_BUSINESS, "用户未审核！");
+				return Result.err(Result.CODE_ERR_BUSINESS, "用户已被禁用！");
 			}
 		}else{//没有查到用户
 			return Result.err(Result.CODE_ERR_BUSINESS, "该用户不存在！");

@@ -43,9 +43,7 @@ public class Product {
     private Integer supplierId;//商品供应商id
     @NotNull
     private String supplierName;//非表中字段 -- 商品供应商名称
-    @NotNull
     private Integer placeId;//商品产地id
-    @NotNull
     private String placeName;//非表中字段 -- 商品产地名称
     @NotNull
     private Integer unitId;//商品单位id
